@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#14101c">
+<title>HEARTBLOCK · Puzzle &amp; Hearts</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='24' font-size='24'%3E%E2%9D%A4%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,600&family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="phone">
+
+  <!-- ===== 顶栏 ===== -->
+  <header id="topbar">
+    <div class="brand">Heart<span>Block</span></div>
+    <div class="top-right">
+      <div class="chip hearts-chip" title="Hearts">
+        <svg viewBox="0 0 24 24" class="ico"><path d="M12 21s-7.5-4.6-10-9.3C.5 8 2.6 4.5 6.2 4.5c2 0 3.6 1.2 4.6 2.7l1.2 1.7 1.2-1.7c1-1.5 2.6-2.7 4.6-2.7 3.6 0 5.7 3.5 4.2 7.2C19.5 16.4 12 21 12 21z"/></svg>
+        <b id="heartCount">0</b>
+      </div>
+      <button id="settingsBtn" class="icon-btn" aria-label="Settings">
+        <svg viewBox="0 0 24 24" class="ico"><path d="M12 8a4 4 0 100 8 4 4 0 000-8zm9.4 4c0-.6-.1-1.1-.2-1.7l2.1-1.6-2-3.5-2.5 1a7.6 7.6 0 00-2.9-1.7L15.4 2h-4l-.5 2.5c-1 .3-2 .9-2.9 1.7l-2.5-1-2 3.5L4.8 10.3c-.1.6-.2 1.1-.2 1.7s.1 1.1.2 1.7l-2.1 1.6 2 3.5 2.5-1c.9.8 1.9 1.4 2.9 1.7l.5 2.5h4l.5-2.5c1-.3 2-.9 2.9-1.7l2.5 1 2-3.5-2.1-1.6c.1-.6.2-1.1.2-1.7z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="pages">
+
+    <!-- ===== 玩法页 ===== -->
+    <section id="page-play" class="page active">
+      <div class="hud">
+        <div class="hud-side"><span class="hud-label" data-i18n="best">BEST</span><b id="bestScore">0</b></div>
+        <div class="hud-score"><b id="score">0</b><span class="hud-label" data-i18n="score">SCORE</span></div>
+        <div class="hud-side"><span class="hud-label" data-i18n="sessionHearts">HEARTS WON</span><b id="sessionHearts" class="rose">+0</b></div>
+      </div>
+      <div id="boardWrap">
+        <canvas id="board"></canvas>
+        <div id="comboPop"></div>
+        <div id="hintOverlay">
+          <div class="hint-card">
+            <b data-i18n="hintTitle">How to play</b>
+            <p data-i18n="hintBody"></p>
+            <button id="hintGo" class="btn primary" data-i18n="hintGo">Got it</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Feed 页 ===== -->
+    <section id="page-feed" class="page">
+      <div class="feed-head">
+        <div class="feed-logo">Heartgram</div>
+        <p class="feed-tag" data-i18n="tagline"></p>
+      </div>
+      <div id="feedList"></div>
+    </section>
+
+    <!-- ===== Gallery 页 ===== -->
+    <section id="page-gallery" class="page">
+      <div class="feed-head">
+        <div class="feed-logo small" data-i18n="tabGallery">Gallery</div>
+        <p class="feed-tag" id="galleryCount"></p>
+      </div>
+      <div id="galleryGrid"></div>
+    </section>
+  </main>
+
+  <!-- ===== 底部导航 ===== -->
+  <nav id="tabbar">
+    <button class="tab active" data-tab="play">
+      <svg viewBox="0 0 24 24" class="ico"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg>
+      <span data-i18n="tabPlay">Play</span>
+    </button>
+    <button class="tab" data-tab="feed">
+      <svg viewBox="0 0 24 24" class="ico"><path d="M12 21s-7.5-4.6-10-9.3C.5 8 2.6 4.5 6.2 4.5c2 0 3.6 1.2 4.6 2.7l1.2 1.7 1.2-1.7c1-1.5 2.6-2.7 4.6-2.7 3.6 0 5.7 3.5 4.2 7.2C19.5 16.4 12 21 12 21z"/></svg>
+      <span data-i18n="tabFeed">Feed</span>
+    </button>
+    <button class="tab" data-tab="gallery">
+      <svg viewBox="0 0 24 24" class="ico"><path d="M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2zm2 13l3-4 2.5 3 3-4 4.5 6H7z"/></svg>
+      <span data-i18n="tabGallery">Gallery</span>
+    </button>
+  </nav>
+</div>
+
+<!-- ===== 游戏结束 ===== -->
+<div class="modal" id="gameOverModal">
+  <div class="modal-card">
+    <div class="modal-kicker" data-i18n="gameOver">Game Over</div>
+    <div class="go-score"><b id="goFinal">0</b><span class="go-newbest" id="goNewBest" data-i18n="newBest">New best!</span></div>
+    <div class="go-stats">
+      <div><span class="hud-label" data-i18n="best">BEST</span><b id="goBest">0</b></div>
+      <div><span class="hud-label" data-i18n="heartsEarned">Hearts earned</span><b class="rose" id="goHearts">+0</b></div>
+    </div>
+    <button id="playAgainBtn" class="btn primary xl" data-i18n="playAgain">Play Again</button>
+  </div>
+</div>
+
+<!-- ===== 解锁确认 ===== -->
+<div class="modal" id="unlockModal">
+  <div class="modal-card">
+    <div class="modal-kicker" data-i18n="unlock">Unlock</div>
+    <img id="umAvatar" class="um-avatar" src="" alt="">
+    <b id="umName" class="um-name"></b>
+    <p id="umQuote" class="quote"></p>
+    <div class="um-cost">
+      <span id="umCost" class="cost-chip">♥</span>
+      <small id="umBalance"></small>
+    </div>
+    <div class="modal-actions">
+      <button id="umCancel" class="btn ghost" data-i18n="cancel">Cancel</button>
+      <button id="umConfirm" class="btn primary" data-i18n="confirm">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 解锁成功 ===== -->
+<div class="modal" id="unlockedModal">
+  <div class="modal-card success">
+    <div class="unlock-burst">♥</div>
+    <b data-i18n="unlockedTitle">Unlocked!</b>
+    <span class="um-ok-name"></span>
+    <p class="dim um-ok-quote"></p>
+  </div>
+</div>
+
+<!-- ===== 大图查看 ===== -->
+<div class="modal lightbox" id="lightbox">
+  <button id="lbClose" class="icon-btn" aria-label="Close">✕</button>
+  <div class="lb-body">
+    <img id="lbImg" src="" alt="">
+    <div class="lb-meta">
+      <b id="lbName"></b>
+      <span id="lbQuote"></span>
+      <em id="lbCounter"></em>
+    </div>
+  </div>
+  <button id="lbPrev" class="lb-nav left">‹</button>
+  <button id="lbNext" class="lb-nav right">›</button>
+</div>
+
+<!-- ===== 设置 ===== -->
+<div class="modal" id="settingsSheet">
+  <div class="modal-card settings">
+    <div class="modal-kicker" data-i18n="settings">Settings</div>
+
+    <div class="set-row">
+      <span data-i18n="language">Language</span>
+      <div class="seg">
+        <button id="langSegEn" class="on">EN</button>
+        <button id="langSegHi">हिन्दी</button>
+      </div>
+    </div>
+    <div class="set-row">
+      <span data-i18n="sound">Sound</span>
+      <button id="soundToggle" class="switch"><i></i></button>
+    </div>
+    <div class="set-row">
+      <span data-i18n="reset">Reset progress</span>
+      <button id="resetBtn" class="btn danger sm" data-i18n="reset">Reset</button>
+    </div>
+    <p class="credits dim" data-i18n="credits"></p>
+    <button id="settingsClose" class="btn ghost" data-i18n="cancel">Close</button>
+  </div>
+</div>
+
+<!-- ===== 重置确认 ===== -->
+<div class="modal" id="resetModal">
+  <div class="modal-card">
+    <p class="reset-warn" data-i18n="resetConfirm"></p>
+    <div class="modal-actions">
+      <button id="resetNo" class="btn ghost" data-i18n="no">Keep it</button>
+      <button id="resetYes" class="btn danger" data-i18n="yes">Yes, reset</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/game.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
