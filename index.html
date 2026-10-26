@@ -12,6 +12,16 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<!-- 金色渐变定义（供所有金锁 SVG 引用） -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff6d0"/>
+      <stop offset=".45" stop-color="#e9b86d"/>
+      <stop offset="1" stop-color="#a8722a"/>
+    </linearGradient>
+  </defs>
+</svg>
 <div id="phone">
 
   <!-- ===== 顶栏 ===== -->
@@ -32,6 +42,18 @@
 
     <!-- ===== 玩法页 ===== -->
     <section id="page-play" class="page active">
+      <!-- 爱心进度条 -->
+      <div class="heartbar">
+        <div class="hb-row">
+          <span class="hb-rate"><i>♥</i><b id="hbRate">+10</b><em data-i18n="perLine">per line</em></span>
+          <span class="hb-count"><b id="hbNow">0</b><i>/</i><span id="hbGoal">100</span><em>♥</em></span>
+        </div>
+        <div class="hb-track">
+          <div class="hb-fill" id="hbFill"></div>
+          <span class="hb-gloss"></span>
+        </div>
+        <div class="hb-cap"><b id="hbName">Priya</b> <span data-i18n="nextPhoto">next photo</span></div>
+      </div>
       <div class="hud">
         <div class="hud-side"><span class="hud-label" data-i18n="best">BEST</span><b id="bestScore">0</b></div>
         <div class="hud-score"><b id="score">0</b><span class="hud-label" data-i18n="score">SCORE</span></div>

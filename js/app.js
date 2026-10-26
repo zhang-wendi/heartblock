@@ -13,7 +13,9 @@ const SAVE_KEY = 'heartblock_save_v1';
 let save;
 const loadSave = () => {
   try { save = JSON.parse(localStorage.getItem(SAVE_KEY)) || null; } catch (e) { save = null; }
-  if (!save) save = { hearts: ECON.starterHearts, best: 0, unlocked: [], lang: 'en', sound: true, seenHint: false };
+  if (!save) save = { v: 2, hearts: ECON.starterHearts, best: 0, unlocked: [], lang: 'en', sound: true, seenHint: false };
+  /* 旧版经济（照片 5~18 心）迁移到新版（×20，每行 +10 心）：缩放余额，已解锁内容保留 */
+  if (!save.v) { save.v = 2; save.hearts = (save.hearts || 0) * 20; persist(); }
 };
 const persist = () => { try { localStorage.setItem(SAVE_KEY, JSON.stringify(save)); } catch (e) { /* 隐私模式忽略 */ } };
 const lang = () => save.lang;
@@ -74,18 +76,33 @@ const floatHearts = n => {
   }
 };
 
-/* ---------------- 心数 UI ---------------- */
-const renderHearts = () => { $('#heartCount').textContent = save.hearts; };
+/* ---------------- 心数 / 解锁进度 ---------------- */
+const renderHearts = () => {
+  $('#heartCount').textContent = save.hearts;
+  renderProgress();
+};
+/* 顶部 Heart Progress Bar：当前心数 → 下一张照片价格 */
+const renderProgress = () => {
+  const next = nextGirl();
+  const goal = next ? next.cost : Math.max(1, save.hearts);
+  const shown = Math.min(save.hearts, goal);
+  $('#hbFill').style.width = Math.min(100, (save.hearts / goal) * 100) + '%';
+  $('#hbNow').textContent = shown;
+  $('#hbGoal').textContent = goal;
+  $('#hbRate').textContent = '+' + ECON.heartPerLine;
+  $('#hbName').textContent = next ? gName(next) : '♥';
+};
 
 /* ---------------- 游戏回调接线 ---------------- */
 const onScore = s => {
   $('#score').textContent = s;
   $('#bestScore').textContent = save.best;
 };
-const onHearts = session => {
-  save.hearts += 1; persist(); renderHearts();
+const onHearts = (amount, session) => {
+  save.hearts += amount; persist(); renderHearts();
   $('#sessionHearts').textContent = '+' + session;
-  floatHearts(3); Sfx.heart();
+  floatHearts(Math.min(6, Math.max(3, Math.round(amount / 3))));
+  Sfx.heart();
 };
 const onCombo = (combo, mult) => {
   const el = $('#comboPop');
@@ -119,6 +136,14 @@ const onGameOver = ({ score, sessionHearts }) => {
 };
 
 /* ---------------- Feed ---------------- */
+/* 金色大锁（渐变在 index.html 的全局 defs 里定义一次） */
+const GOLD_LOCK = `<svg class="gold-lock" viewBox="0 0 24 24" aria-hidden="true">
+  <path d="M7.2 10.4V7.6a4.8 4.8 0 019.6 0v2.8" fill="none" stroke="url(#goldGrad)" stroke-width="2.2" stroke-linecap="round"/>
+  <rect x="4.6" y="9.8" width="14.8" height="11.4" rx="3.2" fill="url(#goldGrad)"/>
+  <circle cx="12" cy="14.6" r="1.5" fill="#5b3a0c"/>
+  <path d="M12 15.8v2.9" stroke="#5b3a0c" stroke-width="1.6" stroke-linecap="round"/>
+</svg>`;
+
 const nextGirl = () => GIRLS.find(g => !save.unlocked.includes(g.id));
 
 const renderFeed = () => {
@@ -140,7 +165,7 @@ const renderFeed = () => {
       </div>
       <div class="card-photo ${unlocked ? '' : 'blurred'}">
         <img src="${girlThumb(g.id)}" alt="${gName(g)}" loading="lazy">
-        ${unlocked ? '' : `<div class="lock-veil"><span class="lock-big">🔒</span><span class="lock-name">${gName(g)}</span></div>`}
+        ${unlocked ? '' : `<div class="lock-veil">${GOLD_LOCK}<span class="lock-name">${gName(g)}</span></div>`}
       </div>
       <div class="card-foot">
         <p class="quote">“${gText(g)}”</p>
@@ -150,7 +175,7 @@ const renderFeed = () => {
             ? `<button class="btn primary unlock-btn" data-id="${g.id}">
                  <span class="hearts-ico">♥</span> ${t('unlockFor')} ${g.cost}
                </button>`
-            : `<div class="seq-num">${String(g.id).padStart(2, '0')} / 20</div>`}
+            : `<div class="seq-num">${t('unlockAt')} ${g.cost} ♥</div>`}
       </div>`;
     list.appendChild(card);
 
@@ -210,17 +235,20 @@ const renderGallery = () => {
   const count = save.unlocked.length;
   $('#galleryCount').textContent = `${count} / 20 ${t('galleryCount')}`;
   grid.innerHTML = '';
-  if (count === 0) {
-    grid.innerHTML = `<div class="gallery-empty">🔒<p>${t('galleryEmpty')}</p></div>`;
-    return;
-  }
+  const firstId = count ? Math.min(...save.unlocked) : null;
+
+  /* 不解锁也全部铺满：模糊轮廓 + 金锁 = 饥饿营销 */
   GIRLS.forEach(g => {
     const unlocked = save.unlocked.includes(g.id);
+    const isFirst = g.id === firstId;
     const tile = document.createElement('button');
-    tile.className = 'tile' + (unlocked ? '' : ' locked');
-    tile.innerHTML = unlocked
-      ? `<img src="${girlThumb(g.id)}" alt="${gName(g)}" loading="lazy"><span class="tile-name">${gName(g)}</span>`
-      : `<span class="lock-big">🔒</span><span class="tile-num">${String(g.id).padStart(2, '0')}</span>`;
+    tile.className = 'tile' + (unlocked ? '' : ' locked') + (isFirst ? ' first' : '');
+    tile.innerHTML = `
+      <img class="tile-img" src="${girlThumb(g.id)}" alt="${unlocked ? gName(g) : ''}" loading="lazy">
+      ${unlocked
+        ? `<span class="tile-name">${gName(g)}</span>`
+        : `<div class="tile-veil">${GOLD_LOCK}<span class="tile-req">${t('unlockAt')} ${g.cost} ♥</span></div>`}
+      ${isFirst ? '<span class="tile-shine"></span><span class="tile-spark"></span>' : ''}`;
     if (unlocked) tile.addEventListener('click', () => openLightbox(g.id));
     grid.appendChild(tile);
   });
@@ -257,7 +285,7 @@ const applyLang = () => {
   $$('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
   $('#langSegEn').classList.toggle('on', lang() === 'en');
   $('#langSegHi').classList.toggle('on', lang() === 'hi');
-  renderFeed(); renderGallery();
+  renderFeed(); renderGallery(); renderProgress();
 };
 
 /* ---------------- 启动 ---------------- */

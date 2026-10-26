@@ -7,26 +7,26 @@
 
 /* ---------- 角色档案（20 人，顺序解锁） ---------- */
 const GIRLS = [
-  { id: 1,  name: 'Priya Sharma',   nameHi: 'प्रिया शर्मा',   age: 26, cost: 5,  en: 'Loves early mornings and old ghazals.',      hi: 'सुबह की चाय और पुराने ग़ज़ल पसंद हैं।' },
-  { id: 2,  name: 'Ananya Iyer',    nameHi: 'अनन्या अय्यर',    age: 24, cost: 5,  en: 'Bharatanatyam dancer on weekends.',          hi: 'वीकेंड पर भरतनाट्यम करती हूं।' },
-  { id: 3,  name: 'Kavya Reddy',   nameHi: 'काव्या रेड्डी',   age: 27, cost: 8,  en: 'Building my own design studio.',             hi: 'अपना डिज़ाइन स्टूडियो बना रही हूं।' },
-  { id: 4,  name: 'Neha Gupta',    nameHi: 'नेहा गुप्ता',     age: 23, cost: 8,  en: 'Flower power over everything.',              hi: 'फूलों से भरी दुनिया मेरी पसंद है।' },
-  { id: 5,  name: 'Pooja Nair',    nameHi: 'पूजा नायर',       age: 25, cost: 8,  en: 'Coffee, books and rainy evenings.',           hi: 'कॉफ़ी, किताबें और बारिश की शाम।' },
-  { id: 6,  name: 'Riya Malhotra', nameHi: 'रिया मल्होत्रा',   age: 24, cost: 10, en: 'Will judge you by your book choice.',        hi: 'किताब से इंसान पहचान लेती हूं।' },
-  { id: 7,  name: 'Aisha Khan',    nameHi: 'आयशा खान',        age: 26, cost: 10, en: 'Stargazing every clear night.',              hi: 'हर साफ़ रात तारे गिनती हूं।' },
-  { id: 8,  name: 'Meera Joshi',   nameHi: 'मीरा जोशी',       age: 28, cost: 12, en: 'Art curator and chai addict.',               hi: 'आर्ट क्यूरेटर और चाय की दीवानी।' },
-  { id: 9,  name: 'Anjali Rao',    nameHi: 'अंजलि राव',       age: 22, cost: 12, en: 'Final year, infinite dreams.',                hi: 'अंतिम वर्ष, अनगिनत सपने।' },
-  { id: 10, name: 'Diya Mehta',    nameHi: 'दीया मेहता',      age: 25, cost: 12, en: 'Food is my love language.',                  hi: 'खाना बनाना मेरी भाषा है।' },
-  { id: 11, name: 'Ishita Verma',  nameHi: 'इशिता वर्मा',      age: 27, cost: 10, en: 'Yoga at sunrise, every day.',                 hi: 'हर दिन सूर्योदय पर योग।' },
-  { id: 12, name: 'Naina Kapoor',  nameHi: 'नैना कपूर',       age: 23, cost: 10, en: 'Bargaining is my superpower.',                hi: 'मोलभाव करना मेरी कला है।' },
-  { id: 13, name: 'Tara Singh',   nameHi: 'तारा सिंह',        age: 26, cost: 15, en: 'Pilot by day, dreamer by night.',             hi: 'दिन में पायलट, रात में सपने।' },
-  { id: 14, name: 'Zara Ali',     nameHi: 'ज़ारा अली',        age: 24, cost: 15, en: 'Jazz nights and velvet dresses.',             hi: 'जैज़ नाइट्स और वेलवेट ड्रेस।' },
-  { id: 15, name: 'Kiara Das',    nameHi: 'कियारा दास',       age: 25, cost: 15, en: 'Writing poetry no one reads.',               hi: 'ऐसी कविताएं जो किसी ने नहीं पढ़ीं।' },
-  { id: 16, name: 'Aditi Chauhan', nameHi: 'अदिति चौहान',     age: 28, cost: 18, en: 'Twice bridesmaid, never the bride.',          hi: 'दो बार ब्राइड्समेड, दुल्हन अभी नहीं।' },
-  { id: 17, name: 'Sana Sheikh',  nameHi: 'साना शेख',        age: 23, cost: 18, en: 'Henna stains and happy hearts.',             hi: 'मेहंदी और खुशियां।' },
-  { id: 18, name: 'Roshni Patel', nameHi: 'रौशनी पटेल',      age: 26, cost: 18, en: 'Event planner with a glitter obsession.',      hi: 'इवेंट प्लानर, ग्लिटर पसंद है।' },
-  { id: 19, name: 'Simran Kaur',  nameHi: 'सिमरन कौर',        age: 24, cost: 18, en: 'Waiting for my filmy moment.',                hi: 'अपनी फ़िल्मी मोमेंट का इंतज़ार।' },
-  { id: 20, name: 'Meghna Bose',  nameHi: 'मेघना बोस',       age: 27, cost: 18, en: 'Dhak beats run in my veins.',                 hi: 'ढाक की थाप मेरी धड़कन है।' },
+  { id: 1,  name: 'Priya Sharma',   nameHi: 'प्रिया शर्मा',   age: 26, cost: 100, en: 'Loves early mornings and old ghazals.',      hi: 'सुबह की चाय और पुराने ग़ज़ल पसंद हैं।' },
+  { id: 2,  name: 'Ananya Iyer',    nameHi: 'अनन्या अय्यर',    age: 24, cost: 100, en: 'Bharatanatyam dancer on weekends.',          hi: 'वीकेंड पर भरतनाट्यम करती हूं।' },
+  { id: 3,  name: 'Kavya Reddy',   nameHi: 'काव्या रेड्डी',   age: 27, cost: 160, en: 'Building my own design studio.',             hi: 'अपना डिज़ाइन स्टूडियो बना रही हूं।' },
+  { id: 4,  name: 'Neha Gupta',    nameHi: 'नेहा गुप्ता',     age: 23, cost: 160, en: 'Flower power over everything.',              hi: 'फूलों से भरी दुनिया मेरी पसंद है।' },
+  { id: 5,  name: 'Pooja Nair',    nameHi: 'पूजा नायर',       age: 25, cost: 160, en: 'Coffee, books and rainy evenings.',           hi: 'कॉफ़ी, किताबें और बारिश की शाम।' },
+  { id: 6,  name: 'Riya Malhotra', nameHi: 'रिया मल्होत्रा',   age: 24, cost: 200, en: 'Will judge you by your book choice.',        hi: 'किताब से इंसान पहचान लेती हूं।' },
+  { id: 7,  name: 'Aisha Khan',    nameHi: 'आयशा खान',        age: 26, cost: 200, en: 'Stargazing every clear night.',              hi: 'हर साफ़ रात तारे गिनती हूं।' },
+  { id: 8,  name: 'Meera Joshi',   nameHi: 'मीरा जोशी',       age: 28, cost: 240, en: 'Art curator and chai addict.',               hi: 'आर्ट क्यूरेटर और चाय की दीवानी।' },
+  { id: 9,  name: 'Anjali Rao',    nameHi: 'अंजलि राव',       age: 22, cost: 240, en: 'Final year, infinite dreams.',                hi: 'अंतिम वर्ष, अनगिनत सपने।' },
+  { id: 10, name: 'Diya Mehta',    nameHi: 'दीया मेहता',      age: 25, cost: 240, en: 'Food is my love language.',                  hi: 'खाना बनाना मेरी भाषा है।' },
+  { id: 11, name: 'Ishita Verma',  nameHi: 'इशिता वर्मा',      age: 27, cost: 200, en: 'Yoga at sunrise, every day.',                 hi: 'हर दिन सूर्योदय पर योग।' },
+  { id: 12, name: 'Naina Kapoor',  nameHi: 'नैना कपूर',       age: 23, cost: 200, en: 'Bargaining is my superpower.',                hi: 'मोलभाव करना मेरी कला है।' },
+  { id: 13, name: 'Tara Singh',   nameHi: 'तारा सिंह',        age: 26, cost: 300, en: 'Pilot by day, dreamer by night.',             hi: 'दिन में पायलट, रात में सपने।' },
+  { id: 14, name: 'Zara Ali',     nameHi: 'ज़ारा अली',        age: 24, cost: 300, en: 'Jazz nights and velvet dresses.',             hi: 'जैज़ नाइट्स और वेलवेट ड्रेस।' },
+  { id: 15, name: 'Kiara Das',    nameHi: 'कियारा दास',       age: 25, cost: 300, en: 'Writing poetry no one reads.',               hi: 'ऐसी कविताएं जो किसी ने नहीं पढ़ीं।' },
+  { id: 16, name: 'Aditi Chauhan', nameHi: 'अदिति चौहान',     age: 28, cost: 360, en: 'Twice bridesmaid, never the bride.',          hi: 'दो बार ब्राइड्समेड, दुल्हन अभी नहीं।' },
+  { id: 17, name: 'Sana Sheikh',  nameHi: 'साना शेख',        age: 23, cost: 360, en: 'Henna stains and happy hearts.',             hi: 'मेहंदी और खुशियां।' },
+  { id: 18, name: 'Roshni Patel', nameHi: 'रौशनी पटेल',      age: 26, cost: 360, en: 'Event planner with a glitter obsession.',      hi: 'इवेंट प्लानर, ग्लिटर पसंद है।' },
+  { id: 19, name: 'Simran Kaur',  nameHi: 'सिमरन कौर',        age: 24, cost: 360, en: 'Waiting for my filmy moment.',                hi: 'अपनी फ़िल्मी मोमेंट का इंतज़ार।' },
+  { id: 20, name: 'Meghna Bose',  nameHi: 'मेघना बोस',       age: 27, cost: 360, en: 'Dhak beats run in my veins.',                 hi: 'ढाक की थाप मेरी धड़कन है।' },
 ];
 
 const girlImg = id => `assets/girls/girl_${String(id).padStart(3, '0')}.webp`;
@@ -43,8 +43,9 @@ const I18N = {
     newBest: 'New best!',
     combo: 'COMBO',
     hintTitle: 'How to play',
-    hintBody: 'Drag a block onto the board. Fill a full row or column to clear it. No gravity — pure strategy.',
+    hintBody: 'Drag a block onto the board. Fill a full row or column to clear it — every line pays +10 hearts. No gravity, pure strategy.',
     hintGo: 'Got it',
+    perLine: 'per line', nextPhoto: 'next photo', unlockAt: 'Unlock at',
     feedNext: 'NEXT UP', feedLocked: 'Locked', feedDone: 'All 20 unlocked — more girls coming soon 🌸',
     unlock: 'Unlock', unlockFor: 'Unlock for', needMore: 'Not enough hearts — play to earn more!',
     heartsBalance: 'Your hearts', confirm: 'Confirm', cancel: 'Cancel',
@@ -64,8 +65,9 @@ const I18N = {
     newBest: 'नया रिकॉर्ड!',
     combo: 'कॉम्बो',
     hintTitle: 'कैसे खेलें',
-    hintBody: 'ब्लॉक को बोर्ड पर खींचें। कोई पूरी पंक्ति या कॉलम भरते ही वह मिट जाती है। कोई गुरुत्व नहीं — सिर्फ़ रणनीति।',
+    hintBody: 'ब्लॉक को बोर्ड पर खींचें। कोई पूरी पंक्ति या कॉलम भरते ही वह मिट जाती है — हर लाइन पर +10 दिल। कोई गुरुत्व नहीं, सिर्फ़ रणनीति।',
     hintGo: 'समझ गई',
+    perLine: 'प्रति लाइन', nextPhoto: 'अगली फोटो', unlockAt: 'अनलॉक',
     feedNext: 'अगली', feedLocked: 'लॉक', feedDone: 'सभी 20 अनलॉक — और लड़कियां जल्द आ रही हैं 🌸',
     unlock: 'अनलॉक करें', unlockFor: 'अनलॉक करें', needMore: 'दिल कम हैं — और कमाने के लिए खेलें!',
     heartsBalance: 'आपके दिल', confirm: 'पक्का', cancel: 'रद्द करें',
@@ -93,15 +95,22 @@ const SHAPES = [
   { c: [[0, 0], [0, 1], [0, 2], [1, 0]], w: 3 }, { c: [[0, 0], [1, 0], [1, 1], [1, 2]], w: 3 },
 ];
 
-/* ---------- 宝石配色 ---------- */
-const BLOCK_COLORS = ['#ff5c8a', '#ffb648', '#35d0ba', '#a78bfa', '#ff7a59'];
+/* ---------- 宝石材质（方块不再是平涂色块） ---------- */
+const BLOCK_GEMS = [
+  { type: 'gem',  light: '#ffb3c9', base: '#ff4d7d', deep: '#7d0c33', glint: '#ffe3ec' }, // 红宝石
+  { type: 'coin', light: '#fff6cf', base: '#f2b33d', deep: '#8a5606', glint: '#fffbe6' }, // 金币
+  { type: 'gem',  light: '#a8fff0', base: '#22c9b1', deep: '#075349', glint: '#e0fffa' }, // 祖母绿
+  { type: 'gem',  light: '#ded1ff', base: '#9b7bff', deep: '#331a7a', glint: '#f3edff' }, // 紫水晶
+  { type: 'gem',  light: '#ffcabb', base: '#ff5f3d', deep: '#7d1f06', glint: '#ffe9e2' }, // 珊瑚宝石
+];
+const BLOCK_COLORS = BLOCK_GEMS.map(g => g.base);
 
 /* ---------- 经济参数（调参入口） ---------- */
 const ECON = {
   boardSize: 8,
-  clearBase: 10,      // 每消除行/列基础分
-  crossBonus: 50,     // 十字消除奖励
-  comboCap: 3,        // 连击倍数上限
-  heartPer: 500,      // 每 N 分 = 1 心
-  starterHearts: 5,   // 初始心数（够解锁第一位）
+  clearBase: 10,       // 每消除行/列基础分
+  crossBonus: 50,      // 十字消除奖励
+  comboCap: 3,         // 连击倍数上限
+  heartPerLine: 10,    // 每消除一行/列 = 10 爱心
+  starterHearts: 0,    // 初始心数（从 0 开始，让进度条有成长感）
 };
